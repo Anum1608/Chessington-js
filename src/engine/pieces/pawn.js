@@ -25,6 +25,7 @@ export default class Pawn extends Piece {
             let firstSquare = Square.at(location.row + 1, location.col)
             let secondSquare = Square.at(location.row + 2, location.col)
 
+
             if ( !board.getPiece(firstSquare) )  {
                 movesList.push(firstSquare)
                 if(!this.hasPieceMoved){
