@@ -12,17 +12,33 @@ export default class Pawn extends Piece {
         let movesList = [];
 
         if (this.player === Player.WHITE) {
-            movesList.push(Square.at(location.row + 1, location.col))
-            if(!this.hasPieceMoved){
-                movesList.push(Square.at(location.row + 2, location.col));
+
+            let firstSquare = Square.at(location.row + 1, location.col)
+            let secondSquare = Square.at(location.row + 2, location.col)
+
+            if ( !board.getPiece(firstSquare) )  {
+                movesList.push(firstSquare)
+                if(!this.hasPieceMoved){
+                    if ( !board.getPiece(secondSquare) )  {
+                        movesList.push(secondSquare);
+                    }
+                }
             }
         } else {
-            movesList.push(Square.at(location.row - 1, location.col))
-            // return Square.at(location.row - 1, location.col)
-            if(!this.hasPieceMoved){
-                movesList.push(Square.at(location.row - 2, location.col));
-            }        
+
+            let firstSquare = Square.at(location.row - 1, location.col)
+            let secondSquare = Square.at(location.row - 2, location.col)
+
+            if ( !board.getPiece(firstSquare) )  {
+                movesList.push(firstSquare)
+                if(!this.hasPieceMoved){
+                    if ( !board.getPiece(secondSquare) )  {
+                        movesList.push(secondSquare);
+                    }
+                } 
+            }       
         }
+        
         return movesList;
 
     }
