@@ -7,31 +7,51 @@ export default class Rook extends Piece {
         super(player);
     }
 
+
+    /*
+    can move laterally
+    can move laterally
+    cannot make any other moves
+    cannot make any other moves
+    cannot move through friendly pieces
+    cannot move through opposing pieces
+    */
     getAvailableMoves(board) {
         let location = board.findPiece(this)
         let movesList = [];
 
-        // add horizontal moves
-        for (let i=0;i<GameSettings.BOARD_SIZE;i++){
-
-            if(i!=location.col){
-                movesList.push(Square.at(location.row,i));
-            }      
+        //right search
+        for (let i=location.col+1;i<GameSettings.BOARD_SIZE;i++){
+            if( !board.getPiece(Square.at(location.row,i)) )
+                movesList.push( Square.at(location.row,i) ) 
+            else
+                break
         }
 
-        // add vertical moves
-        for (let i=0;i<GameSettings.BOARD_SIZE;i++){
-
-            if(i!=location.row){
-                movesList.push(Square.at(i,location.col));
-            }      
+        // left search
+        for (let i=location.col-1; i>-1; i--){
+            if( !board.getPiece(Square.at(location.row,i)) )
+                movesList.push( Square.at(location.row,i) ) 
+            else
+                break
         }
-        
+
+        //down search
+        for (let i=location.row+1;i<GameSettings.BOARD_SIZE;i++){
+            if( !board.getPiece(Square.at(i,location.col)) )
+                movesList.push( Square.at(i,location.col) ) 
+            else
+                break
+        }
+
+        // up search
+        for (let i=location.row-1; i>-1; i--){
+            if( !board.getPiece(Square.at(i,location.col)) )
+                movesList.push( Square.at(i,location.col) ) 
+            else
+                break
+        }
+                
         return movesList;
-
-        // give a list of available moves for rook
-        //can move laterally
-
-        //return new Array(0);
     }
 }

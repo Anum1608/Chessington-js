@@ -13,7 +13,8 @@ export default class Pawn extends Piece {
     cannot move if there is a piece in front
     cannot move two squares if there is a piece two sqaures in front 
     can move diagonally if there is a piece to take
-    cannot take a friendly piece*/
+    cannot take a friendly piece
+    cannot take the opposing king*/
 
     getAvailableMoves(board) {
         let location = board.findPiece(this)
@@ -49,7 +50,7 @@ export default class Pawn extends Piece {
 
         // can move diagonally if there is a piece to take
         // cannot take a friendly piece
-        // TODO cannot take the opposing king
+        // cannot take the opposing king
         let diagonalSquare1= Square.at(location.row+1, location.col+1)
         let diagonalSquare2= Square.at(location.row+1, location.col-1)
         let diagonalSquare3= Square.at(location.row-1, location.col+1)
