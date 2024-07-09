@@ -16,7 +16,11 @@ export default class Rook extends Piece {
     cannot make any other moves
     cannot move through friendly pieces
     cannot move through opposing pieces
+    can take opposing pieces
+    cannot take the opposing king
     */
+
+    
     getAvailableMoves(board) {
         let location = board.findPiece(this)
         let movesList = [];
