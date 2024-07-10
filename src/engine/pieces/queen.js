@@ -20,56 +20,71 @@ export default class Queen extends Piece {
         for (let i = location.col + 1; i < GameSettings.BOARD_SIZE; i++) {
             let rightSquare = Square.at(location.row, i)
             let rightPiece = board.getPiece(rightSquare)
-            if (!rightPiece)
-                movesList.push(rightSquare)
-            else if (rightPiece && rightPiece.player !== this.player ) {
-                movesList.push(rightSquare)
-                break
-            }
-            else
-                break
+            
+            // If the piece a friendly piece, stop
+            if (rightPiece && rightPiece.player === this.player)
+                break;
+
+            // Make the move
+            movesList.push(rightSquare);
+
+            // If we have taken a piece, stop
+            if (rightPiece)
+                break;
         }
+
 
         // left search
         for (let i = location.col - 1; i > -1; i--) {
             let leftSquare = Square.at(location.row, i)
             let leftPiece = board.getPiece(leftSquare)
-            if (!leftPiece)
-                movesList.push(leftSquare)
-            else if (leftPiece && leftPiece.player !== this.player ) {
-                movesList.push(leftSquare)
-                break
+
+            // If the piece is friendly, stop
+            if (leftPiece && leftPiece.player === this.player)
+                break;
+
+            // Make the move
+            movesList.push(leftSquare);
+
+            // If we have taken a piece, stop
+            if (leftPiece)
+                break;
             }
-            else
-                break
-        }
 
         //down search
         for (let i = location.row + 1; i < GameSettings.BOARD_SIZE; i++) {
             let downSquare = Square.at(i, location.col)
             let downPiece = board.getPiece(downSquare)
-            if (!downPiece)
-                movesList.push(downSquare)
-            else if (downPiece && downPiece.player !== this.player) {
-                movesList.push(downSquare)
-                break
-            }
-            else
-                break
+            
+            // If the piece is friendly, stop
+            if (downPiece && downPiece.player === this.player)
+                break;
+
+            // Make the move
+            movesList.push(downSquare);
+
+            // If we have taken a piece, stop
+            if (downPiece)
+                break;
+
         }
 
         // up search
         for (let i = location.row - 1; i > -1; i--) {
             let upSquare = Square.at(i, location.col)
             let upPiece = board.getPiece(upSquare)
-            if (!upPiece)
-                movesList.push(upSquare)
-            else if (upPiece && upPiece.player !== this.player ) {
-                movesList.push(upSquare)
-                break
-            }
-            else
-                break
+
+            // If the piece is friendly, stop
+            if (upPiece && upPiece.player === this.player)
+                break;
+
+            // Make the move
+            movesList.push(upSquare);
+
+            // If we have taken a piece, stop
+            if (upPiece)
+                break;
+
         }
 
         //down and right diagonal
@@ -79,7 +94,7 @@ export default class Queen extends Piece {
             let downrightSquare = Square.at(j, i)
             let downrightPiece = board.getPiece(downrightSquare)
 
-            // If we have a piece, and it is a King or a friendly piece, no more processing
+            // If we have a friendly piece, no more processing
             if (downrightPiece && (downrightPiece.player === this.player))
                 break;
 
