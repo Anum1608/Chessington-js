@@ -9,64 +9,62 @@ export default class Bishop extends Piece {
 
     getAvailableMoves(board) {
         let location = board.findPiece(this)
-        let movesList = [
-            // Square.at(0, 1), Square.at(1, 2), Square.at(3, 4), Square.at(4, 5), Square.at(5, 6), Square.at(6, 7),
-            // Square.at(0, 5), Square.at(1, 4), Square.at(3, 2), Square.at(4, 1), Square.at(5, 0)
-        ];
+        let movesList = [];
 
         //down and right diagonal
-        for (let i=location.col+1;i<GameSettings.BOARD_SIZE;i++){
-            for (let j=location.row+1;j<GameSettings.BOARD_SIZE;j++){
+        let i=location.col+1;
+        let j=location.row+1;
+        while(i<GameSettings.BOARD_SIZE && j<GameSettings.BOARD_SIZE){
+            let downrightSquare = Square.at(j,i)
+            let downrightPiece = board.getPiece(downrightSquare)
 
-                let downrightSquare = Square.at(j,i)
-                let downrightPiece = board.getPiece(downrightSquare)
+            //if( !uprightPiece )
+                movesList.push( downrightSquare ) 
 
-                //if( !downrightPiece )
-                    movesList.push( downrightSquare ) 
-
-            }
+            i++
+            j++
         }
 
         //up and right
-        for (let i=location.col+1;i<GameSettings.BOARD_SIZE;i++){
-            for (let j=location.row-1;j>-1;j--){
-
+        i=location.col+1;
+        j=location.row-1;
+        while(i<GameSettings.BOARD_SIZE && j>-1){
                 let uprightSquare = Square.at(j,i)
                 let uprightPiece = board.getPiece(uprightSquare)
 
                 //if( !uprightPiece )
                     movesList.push( uprightSquare ) 
 
-            }
-
+                i++
+                j--
         }
 
         // down and left
-        for (let i=location.col-1; i>-1; i--){
-            for (let j=location.row+1;j<GameSettings.BOARD_SIZE;j++){
+        i=location.col-1;
+        j=location.row+1;
+        while(j<GameSettings.BOARD_SIZE && i>-1){
+            let downleftSquare = Square.at(j,i)
+            let downleftPiece = board.getPiece(downleftSquare)
 
-                let downleftSquare = Square.at(j,i)
-                let downleftPiece = board.getPiece(downleftSquare)
+            //if( !uprightPiece )
+                movesList.push( downleftSquare ) 
 
-                //if( !downleftPiece )
-                    movesList.push( downleftSquare ) 
-
-            }
-
+            i--
+            j++
         }
 
         // up and left
-        for (let i=location.col-1; i>-1; i--){
-            for (let j=location.row-1;j>-1;j--){
+        i=location.col-1;
+        j=location.row-1;
+        while(j>-1 && i>-1){
+            let upleftSquare = Square.at(j,i)
+            let upleftPiece = board.getPiece(upleftSquare)
 
-                let upleftSquare = Square.at(j,i)
-                let upleftPiece = board.getPiece(upleftSquare)
+            //if( !uprightPiece )
+                movesList.push( upleftSquare ) 
 
-                //if( !upleftPiece )
-                    movesList.push( upleftSquare ) 
-
-            }
-
+            i--
+            j--
         }
 
         return movesList
